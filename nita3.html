@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.wrapper{
+			position: relative;
+		    top: 200px;
+		    left: 200px;
+		    border: solid 5px #00f730;
+		    width: 100px;
+		    height: 100px;
+		    border-radius: 100px;
+		}
+
+		.hand_1{
+			position: absolute;
+		    width: 40px;
+		    height: 7px;
+		    background-color: #cbf7d4;
+		    transform: rotate(45deg);
+		    transform-origin: bottom;
+		    border-radius: 30px;
+		    top: 50px;
+  			left: 6px;
+  			z-index: 1;
+  			overflow: hidden;
+		}
+
+		.hand_2:before{
+			width: 100%;
+		}
+
+		.hand_2{
+			animation-name: end_color;
+		    animation-delay: 1.25s;
+		    animation-duration: 0.25s;
+		    padding-left: 65px;
+		    overflow: hidden;
+		    box-sizing: border-box;
+		    animation-fill-mode: forwards;
+		    overflow: hidden;
+		}
+
+		.hand_1:before,.hand_2:before{
+			height: 100%;
+			background-color: #00f730;
+			content: "";
+			display: block;
+			width: 100%;
+		}
+
+		.hand_1:before{
+			animation-name: width_inc;
+		    animation-timing-function: ease-out;
+		    animation-fill-mode: forwards;
+		    width: 0%;
+			animation-duration: 0.25s;
+		    animation-delay: 1s;
+		}
+
+		.hand_2{
+			position: absolute;
+		    width: 65px;
+		    height: 7px;
+		    background-color: #cbf7d4;
+		    transform: rotate(135deg);
+		    transform-origin: bottom;
+		    border-radius: 30px 0px 0px 30px;
+		    top: 36px;
+    		left: 26px
+		}
+
+		.circle{
+			top: -5px;
+		    left: -5px;
+		    position: absolute;
+		    width: 100px;
+		    height: 100px;
+		    border-radius: 100px;
+		    /* background-color: yellow; */
+		    border: solid 5px #53e4704d;
+		    z-index: 1;
+		    animation-name: end_scale;
+		    animation-duration: 0.25s;
+		    animation-delay: 1.5s;
+		    animation-direction: alternate-reverse;
+		    animation-fill-mode: forwards;
+		    animation-iteration-count: 2;
+		}
+
+		.wrapper::after{
+			content: "";
+		    display: block;
+		    width: 135px;
+		    height: 67px;
+		    position: absolute;
+		    top: -5px;
+		    background-color: white;
+		    transform: rotate(225deg);
+		    transform-origin: bottom center;
+		    left: -37px;
+		}
+
+		.wrapper::before{
+			content: "";
+		    display: block;
+		    width: 198px;
+		    height: 80px;
+		    position: absolute;
+		    top: -22px;
+		    background-color: white;
+		    transform: rotate(45deg);
+		    transform-origin: bottom center;
+		    left: -63px;
+		    animation-name: rotate;
+		    animation-duration: 1s;
+		    animation-timing-function: ease-out;
+		}
+
+
+		.fix{
+			position: absolute;
+		    width: 150px;
+		    height: 7px;
+		    background-color: white;
+		    transform: rotate(45deg);
+		    transform-origin: bottom;
+		    border-radius: 14px;
+		    top: 56px;
+		    left: -44px;
+		}
+
+		@keyframes rotate{
+			from {
+				transform: rotate(45deg);
+			}
+
+			to{
+				transform: rotate(-315deg);
+			}
+		}
+
+
+		@keyframes width_inc{
+			from{
+				width: 0%;
+			}
+
+			to{
+				width:100%;
+			}
+		}
+
+		@keyframes end_color{
+			to{
+				padding-left: 0px;
+			}
+		}
+
+		@keyframes end_scale{
+			from{
+				transform: scale(0.9);
+			}
+
+			50%{
+				 border-color: #cbf7d4;
+			}
+
+			to{
+				transform: scale(1.1);
+			}
+		}
+	</style>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="hand_1"></div>
+		<div class="hand_2"></div>
+		<div class="circle"></div>
+		<div class="fix"></div>
+	</div>
+
+</body>
+</html>

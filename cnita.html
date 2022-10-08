@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		
+		div{
+			box-sizing: border-box;
+		}
+		.wrapper{
+			width: 200px;
+			position: absolute;
+			top:30%;
+			left: 30%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.board{
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			border-bottom: solid 2px brown;
+			transform-origin: bottom;
+		}
+
+		.person{
+			width: 20px;
+			height: 20px;
+			background-color: orange;
+			position: relative;
+			transition-property: top;
+			border-radius: 15px;
+		}
+
+		.furcrum{
+			width: 15px;
+			height: 15px;
+			border-radius: 20px;
+			background-color: black;
+		}
+
+		.board,.person{
+			animation-duration: 5s;
+			animation-iteration-count: 12;
+			animation-timing-function: ease-in-out;
+			/*animation-delay: 0.5s;
+			transition: top, transform 300ms linear;*/
+
+		}
+
+		.board{
+			animation-name: board1;
+			
+		}
+
+		.person-1{
+			animation-name: person1;
+		}
+
+		.person-2{
+			animation-name: person2;
+		}
+
+		@keyframes board1{
+			0%{
+				transform: rotate(0deg);
+			}
+
+			8%{
+
+			}
+
+			16%{
+				transform: rotate(45deg)
+			}
+
+			24%{
+				
+			}
+
+			32%{
+				transform: rotate(-35deg)
+			}
+
+			40%{
+
+			}
+
+			48%{
+				transform: rotate(35deg)
+			}
+
+			56%{
+
+			}
+
+			64%{
+				transform: rotate(-35deg)
+			}
+
+			72%{
+
+			}
+
+			80%{
+				transform: rotate(35deg)
+			}
+
+			88%{
+
+			}
+
+			96%{
+				transform: rotate(0deg)
+			}
+		}
+
+		@keyframes person1{
+			0%{
+				top:0px;
+			}
+
+			8%{
+				top:-100px;
+			}
+
+			16%{
+				top:0px;
+			}
+
+			24%{
+				
+			}
+
+			32%{
+				top:0px;
+			}
+
+			40%{
+				top:-125px;
+			}
+
+			48%{
+				top:0px;
+			}
+
+			56%{
+
+			}
+
+			64%{
+				top:0px;
+			}
+
+			72%{
+				top:-125px;
+			}
+
+			80%{
+				top:0px;
+			}
+
+			88%{
+
+			}
+
+			96%{
+				top:0px;
+			}
+
+
+		}
+
+		@keyframes person2{
+			0%{
+				
+			}
+
+			8%{
+				
+			}
+
+			16%{
+				top:0px;
+			}
+
+			24%{
+				top:-125px;
+			}
+
+			32%{
+				top:0px;
+			}
+
+			40%{
+
+			}
+
+			48%{
+				top:0px;
+			}
+
+			56%{
+				top:-125px;
+			}
+
+			64%{
+				top:0px;
+			}
+
+			72%{
+
+			}
+
+			80%{
+				top:0px;
+			}
+
+			88%{
+				top:-125px;
+			}
+
+			96%{
+				top:0px;
+			}
+			
+		}
+
+
+	</style>
+</head>
+<body>
+
+	<div class="wrapper">
+
+		<div class="board">
+			<div class="person person-1"></div>
+			<div class="person person-2"></div>
+		</div>
+		
+		<div class="furcrum"></div>
+
+	</div>
+</body>
+</html>

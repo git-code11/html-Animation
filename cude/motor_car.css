@@ -1,0 +1,305 @@
+
+:root{
+	box-sizing: border-box;
+}
+
+
+#car{
+	position: relative;
+	transform-style: preserve-3d;
+	transform: translateZ(400px);
+}
+
+#car > div{
+	position: absolute;
+	background-color: #23452301;
+}
+
+#car #front{
+	transform: translateZ(1.5rem);
+}
+
+#car #back{
+	transform: translateZ(-1.5rem);
+}
+
+#car #right {
+	transform: rotateY(-90deg) translateZ(1.5rem);
+	transform-style: preserve-3d;
+}
+
+#car #left {
+	transform: rotateY(90deg) translateZ(1.5rem);
+	transform-style: preserve-3d;
+}
+
+#car #top{
+	transform: rotateX(90deg) translateY(-1.5rem);
+}
+
+#car #bottom{
+	transform: rotateX(-90deg) translateY(-1.5rem) translateZ(calc(2rem + 1.3rem));
+}
+
+.front_of_car, .side_of_car{
+	position: relative;
+	height: 4em;
+}
+
+#car #left .front_of_car{
+	transform: translateZ(7em);
+}
+
+.side_of_car{
+	width: 10em;
+}
+
+.front_of_car{
+	width:3em;
+	transform-style: preserve-3d;
+}
+
+
+.side_layer_1{
+	background-color: #23aa2312;
+	height: 2rem;
+	width:4rem;
+	position: relative;
+	transform: translateX(3rem);
+}
+
+
+ .side_layer_1 .frame_side,
+ .side_layer_1 .frame_top_bottom{
+ 	position: absolute;
+ }
+
+ .side_layer_1 .frame_side::before,
+ .side_layer_1 .frame_side::after{
+	content: "";
+	display: block;
+	background-color: #000;
+	width: 0.125rem;
+	--angle:30deg;
+	--cos-angle:0.866;
+	--height:calc(2rem / var(--cos-angle));
+	height: var(--height);
+	position: absolute;
+	top: 0;
+	transform-origin: top left;
+	transform: rotate(30deg);
+}
+
+
+ .side_layer_1 .frame_side::after{
+	right: 0;
+	transform-origin: top right;
+	transform: translate(4rem) rotate(-30deg);
+}
+
+.side_layer_1 .frame_top_bottom::before,
+.side_layer_1 .frame_top_bottom::after{
+	position: absolute;
+	content: "";
+	display: block;
+	height: 0.125rem;
+	width: 4rem;
+	background-color: #000;
+}
+
+.side_layer_1 .frame_top_bottom::after{
+	width: 10rem;
+	transform: translate(-3rem, 2rem);
+}
+
+.side_layer_2{
+	background-color: #aa2323a1;
+	height: 1.3rem;
+	width:10rem;
+}
+
+.front_layer_1{
+	position: absolute;
+	background-color: red;
+	--cos-angle:0.866;
+	--height:calc(2rem / var(--cos-angle));
+	width: 3rem;
+	height: var(--height);
+	transform: translateZ(-3rem) rotateX(30deg);
+    transform-origin: top center;
+  
+}
+
+.front_layer_2{
+	position: absolute;
+    background-color: yellow;
+    --tan-angle: 0.5773;
+    --height: calc(2rem * var(--tan-angle));
+    width: 3rem;
+    height: calc(3rem - var(--height));
+    transform: rotateX(90deg) translateZ(-2rem) translateY(calc(-3rem + var(--height)));
+    transform-origin: top left;
+}
+
+.front_layer_3{
+	position: absolute;
+    background-color: #31cb9de3;
+    width: 3rem;
+    height: 1.3em;
+    transform: translateY(2em);
+}
+
+.top_layer_1{
+	position: absolute;
+	width: 4rem;
+	height: 3rem;
+	background-color: orange;
+	transform: translateX(3em);
+}
+
+#car #bottom .top_layer_1{
+	width: 10em;
+	transform: translateX(0em);	
+}
+
+#car #under_bottom{
+	position: relative;
+	transform-style: preserve-3d;
+}
+
+.tyre{
+	transform-style: preserve-3d;
+	position: relative;
+	display: grid;
+	place-items:center;
+	transform: translateY(3.3em) translateZ(-1.25em) translateX(2em);
+}
+
+.tyre.t-2{
+	transform: translateY(3.3em) translateZ(1.25em) translateX(2em);
+}
+
+.tyre.t-3{
+	transform: translateY(3.3em) translateZ(1.25em) translateX(8.5em);
+}
+
+.tyre.t-4{
+	transform: translateY(3.3em) translateZ(-1.25em) translateX(8.5em);
+}
+
+
+.tyre .roller_tyre{
+	--length:1.5rem;
+	--z_half:0.25rem;
+	--radius: calc(var(--length) / 2);
+	--circumference:calc((22 * var(--length)) / 7);
+	--d_x:calc(var(--z_half) * 2);
+	--d_y: calc(var(--circumference) / var(--total));
+	display: grid;
+	place-items:center;
+	transform-style: preserve-3d;
+	transform: rotateY(90deg);
+	--angdiff:calc(360deg / var(--total));
+}
+
+
+.tyre .roller_tyre .roll{
+	width: var(--d_x);
+	height: var(--d_y);
+	background-color: #2323ffaa;
+	transform: rotateX(calc(var(--angdiff) * var(--i))) translateZ(var(--radius));
+	position: absolute;
+}
+
+.tyre .roller_tyre:before, .tyre .roller_tyre:after{
+	--length:1.5rem;
+	--z_half:0.25rem;
+	content: "";
+	display: block;
+	width: var(--length);
+	height: var(--length);
+	background-color: #000000ee;
+	border-radius: 50%;
+	position: absolute;
+	transform: rotateY(90deg) translateZ(var(--z_half));
+}
+
+.tyre .roller_tyre:after{
+	transform: rotateY(90deg) translateZ(calc(var(--z_half) * -1));
+}
+
+.side_glass_car{
+	position: absolute;
+	display: grid;
+	place-items:center;
+}
+
+.side_glass_car .glass_1{
+	width: 4rem;
+	height: 2rem;
+	background-color: purple;
+	position: relative;
+}
+
+.end_point_glass{
+	position: absolute;
+}
+
+.end_point_glass::before, 
+.end_point_glass::after{
+	content: "";
+	display: block;
+	position: absolute;
+	--angle: 30deg;
+    --cos-angle: 0.866;
+    --sin-angle:0.5;
+	--y_size:2rem;
+	--height: calc(var(--y_size) / var(--cos-angle));
+	--width:calc( (var(--y_size) * var(--sin-angle)) / (var(--cos-angle) * var(--cos-angle)) );
+	width: var(--width);
+	height: var(--height);
+	transform: rotateZ(var(--angle));
+	transform-origin: top left;
+	background-color: orange;
+}
+
+.end_point_glass::after{
+	transform-origin: top right;
+	transform: translateX(calc(4rem - var(--width))) rotateZ(calc(var(--angle) * -1));
+}
+
+.divide_frame{
+	width: 0.125rem;
+	height: 2rem;
+	position: absolute;
+	transform: translateX(calc(2rem - 0.0625rem));
+	background-color: black;
+}
+
+
+@keyframes motion{
+	0%{
+		transform: translate3d(0px, 0px, 0px) rotateY(0deg);
+	}
+
+	25%{
+		transform: translate3d(400px, 0px, -400px)rotateY(90deg);
+	}
+
+	50%{
+		transform: translate3d(0px, 0px, -800px) rotateY(180deg);
+	}
+
+	75%{
+		transform: translate3d(-400px, 0px, -400px) rotateY(270deg);
+	}
+
+	100%{
+		transform: translate3d(0px, 0px, 0px) rotateY(360deg);
+	}
+}
+
+#car{
+	animation-name: motion;
+	animation-duration:5s;
+}

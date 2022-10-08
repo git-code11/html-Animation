@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="moresettings.css">
+	<link rel="stylesheet" type="text/css" href="motor_car.css">
+</head>
+<body>
+
+	<div id="wrapper">
+		<div id="board_wrapper">
+			<div id="left_settings">
+				<div class="Controller">
+					<div class="inputgroup">
+						<span>Perspective</span>
+						<span>1000</span>
+						<input id="perspective" type="range" min="0" max="1000" value="1000"/>
+					</div>
+				</div>
+			</div>
+
+			<div id="board">
+				<!--start here -->
+				<div id="car">
+					<div id="front">
+						<div class="side_of_car">
+							<div class="side_layer_1">
+								
+								<div class="end_point_glass"></div>
+								<div class="side_glass_car">
+									<div class="glass_1"></div>
+								</div>
+								<div class="divide_frame"></div>
+								<div class="frame_side"></div>
+								<div class="frame_top_bottom"></div>
+							</div>
+							<div class="side_layer_2"></div>
+						</div>
+					</div>
+
+					<div id="back">
+						<div class="side_of_car">
+							<div class="side_layer_1">
+								
+								<div class="end_point_glass"></div>
+								<div class="side_glass_car">
+									<div class="glass_1"></div>
+								</div>
+								<div class="divide_frame"></div>
+								<div class="frame_side"></div>
+								<div class="frame_top_bottom"></div>
+							</div>
+							<div class="side_layer_2"></div>
+						</div>
+					</div>
+
+					<div id="right">
+						<div class="front_of_car">
+							<div class="front_layer_1"></div>
+							<div class="front_layer_2"></div>
+							<div class="front_layer_3"></div>
+						</div>
+					</div>
+
+					<div id="left">
+						<div class="front_of_car">
+							<div class="front_layer_1"></div>
+							<div class="front_layer_2"></div>
+							<div class="front_layer_3"></div>
+						</div>
+					</div>
+
+					<div id="top">
+						<div class="top_of_car">
+							<div class="top_layer_1"></div>
+						</div>
+					</div>
+
+					<div id="bottom">
+						<div class="top_of_car">
+							<div class="top_layer_1"></div>
+						</div>
+					</div>
+
+					<div id="under_bottom">
+						<div class="tyre t-1">
+							<div class="part-2 roller_tyre" style="--total:30">
+								<script type="text/javascript">
+									for(let i=0; i<30; i++)
+										document.write(`<div class="roll" style="--i:${i}"></div>`)
+								</script>
+							</div>
+						</div>
+
+						<div class="tyre t-2">
+							<div class="part-2 roller_tyre" style="--total:30">
+								<script type="text/javascript">
+									for(let i=0; i<30; i++)
+										document.write(`<div class="roll" style="--i:${i}"></div>`)
+								</script>
+							</div>
+						</div>
+
+						<div class="tyre t-3">
+							<div class="part-2 roller_tyre" style="--total:30">
+								<script type="text/javascript">
+									for(let i=0; i<30; i++)
+										document.write(`<div class="roll" style="--i:${i}"></div>`)
+								</script>
+							</div>
+						</div>
+
+						<div class="tyre t-4">
+							<div class="part-2 roller_tyre" style="--total:30">
+								<script type="text/javascript">
+									for(let i=0; i<30; i++)
+										document.write(`<div class="roll" style="--i:${i}"></div>`)
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- <div id="tyre">
+					<div class="side_tyre part-1"></div>
+					<div class="part-2 roller_tyre" style="--total:30">
+						<script type="text/javascript">
+							for(let i=0; i<30; i++)
+								document.write(`<div class="roll" style="--i:${i}"></div>`)
+						</script>
+					</div>
+					<div class="part-3"></div>
+				</div> -->
+				<!--end here -->
+
+				<!-- <div id="cube">
+					<div class="front" style="--ang:0"></div>
+					<div class="right" style="--ang:1"></div>
+					<div class="back" style="--ang:2"></div>
+					<div class="left" style="--ang:3"></div>
+					<div class="up" style="--ang:1"></div>
+					<div class="down" style="--ang:3"></div>
+				</div> -->
+			</div>
+
+			<div id="right_settings">
+				<div class="textField">
+					<div>
+						<span>Size</span>
+						<input type="number" min="80" max="500" value="200" step="5" />
+					</div>
+					<div>
+						<span>Space</span>
+						<input type="number"  min="0" max="300" value="0" step="5" />
+					</div>
+					<div>
+						<span>Scale</span>
+						<input type="number"  min="0.0" max="2.0" value="1.0" step="0.2" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="bottom_settings">
+			<div class="controller">
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>TranslateX</span>
+				</div>
+
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>TranslateY</span>
+				</div>
+
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>TranslateZ</span>
+				</div>
+
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>RotateX</span>
+				</div>
+
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>RotateY</span>
+				</div>
+
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>RotateZ</span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+<script type="text/javascript" src="moresettings.js"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,225 @@
+<html>
+	<head>
+		<style>
+			
+			:root{
+				--cubeSize:200px;
+				--perspective:800px;
+				--space:0px;
+			}
+			
+			*{
+				padding:0;
+				margin:0;
+				box-sizing:border-box;
+				transition:.5s;
+			}
+			
+			section{
+				display:grid;
+				width:60vw;
+				margin:auto;
+			}
+			
+			.container,.cube {
+				display:flex;
+				justify-content:center;
+				align-items:center;
+			}
+			
+			.container{
+				height:60vh;
+				width:100%;
+				margin: 20px auto;
+				background:#000000;
+				perspective:var(--perspective);
+				
+			}
+			
+			.cube{
+				position:relative;
+				transform-style:preserve-3d;
+				transform: rotateY(45deg) rotateZ(-15deg);
+			}
+			
+			.cube > div{
+				position:absolute;
+				width:var(--cubeSize);
+				height:var(--cubeSize);
+				background-color:#25ff4533;
+				border: solid 1px yellow;
+				color:white;
+				
+			}
+			
+			.cube > div{
+				transform: rotateY( calc(90deg * var(--ang))) translateZ( calc(var(--cubeSize) / 2 + var(--space)  ));
+			}
+			
+			.cube > div:nth-child(5),.cube > div:nth-child(6){
+				transform: rotateX( calc(90deg * var(--ang))) translateZ( calc(var(--cubeSize) / 2 + var(--space)  ));
+			}
+			
+			.controller{
+			}
+			
+			.controller .inputgroup{
+				display:grid;
+				grid-template-columns:1fr max-content;
+				grid-gap:10px;
+				margin:10px auto;
+				position:relative
+			}
+			
+			.controller input{
+				width:100%;
+				position:relative;
+			}
+			
+			.inputgroup > span:first-child{
+				position:absolute;
+				content:attr(value);
+				left:-50px;
+				font-size:18px;
+				font-weight:bold;
+				font-family:Consolas;
+				line-height:0.5em;
+				text-align:center;
+			}
+			
+			.textField {
+				position:absolute;
+				right:20px;
+				top:20px;
+			}
+			
+			.textField > div{
+				display:flex;
+				gap:20px;
+				justify-content:flex-end;
+				font-size:1.5em;
+				margin-bottom:20px;
+			}
+			
+			.textField input, .textField > div{
+				font-size:1.2em;
+				font-weight:bold;
+				text-align:center;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<section>
+			<div class="container">
+				<div class="cube">
+					<div class="front" style="--ang:0"></div>
+					<div class="right" style="--ang:1"></div>
+					<div class="back" style="--ang:2"></div>
+					<div class="left" style="--ang:3"></div>
+					<div class="up" style="--ang:1"></div>
+					<div class="down" style="--ang:3"></div>
+				</div>
+			</div>
+			
+			<div class="Controller">
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>TranslateX</span>
+				</div>
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>TranslateY</span>
+				</div>
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>TranslateZ</span>
+				</div>
+			</div>
+			
+			<div class="Controller">
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>RotateX</span>
+				</div>
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>RotateY</span>
+				</div>
+				<div class="inputgroup">
+					<span>0</span>
+					<input type="range" min="-360" max="360" value="0"/>
+					<span>RotateZ</span>
+				</div>
+			</div>
+			
+			<div class="Controller">
+				<div class="inputgroup">
+					<span>1000</span>
+					<input type="range" min="0" max="1000" value="1000"/>
+					<span>Perspective</span>
+				</div>
+			</div>
+			
+			<div class="textField">
+				<div>
+					<span>Size</span>
+					<input type="number" min="80" max="500" value="200"/>
+				</div>
+				<div>
+					<span>Space</span>
+					<input type="number"  min="0" max="300" value="0"/>
+				</div>
+				<div>
+					<span>Scale</span>
+					<input type="number"  min="0.0" max="2.0" value="1"/>
+				</div>
+			</div>
+		</section>
+	</body>
+	<script>
+	const cube = document.querySelector(".cube");
+	const elt = document.querySelectorAll('input[type="range"]');
+	cube.parentElement.style.setProperty("--scale",1)
+	function update(){
+		let value = `translateX(${elt[0].value}px) translateY(${elt[1].value}px) translateZ(${elt[2].value}px) rotateX(${elt[3].value}deg) rotateY(${elt[4].value}deg) rotateZ(${elt[5].value}deg) scale(${cube.parentElement.style.getPropertyValue("--scale")})`
+		//`translate(${elt[0].value}px, ${elt[1].value}px, ${elt[2].value}px) rotate(${elt[3].value}deg, ${elt[4].value}deg, ${elt[5].value}deg) translateX(${elt[0].value}px) `;
+		cube.style.transform = value;
+	}
+	
+	function update_perspective(){
+		cube.parentElement.style.perspective = `${elt[6].value}px`
+		return `${elt[6].value}px`;
+	}
+	for(let et of elt){
+		et.onchange = update;
+	}
+	elt[6].onchange = update_perspective;
+	
+	const elt_num = document.querySelectorAll('input[type="number"]');
+	
+	function datatChange(){
+		cube.parentElement.style.setProperty("--cubeSize",`${elt_num[0].value}px`);
+		cube.parentElement.style.setProperty("--space",`${elt_num[1].value}px`);
+		cube.parentElement.style.setProperty("--scale",elt_num[2].value);
+		update();
+	}
+	
+	for(let et of elt_num){
+		et.onchange = datatChange;
+	}
+	
+	function elementChange(){
+		this.previousElementSibling.innerHTML = this.value;
+	}
+	
+	for(let elem of elt){
+		elem.addEventListener("change",elementChange, false);
+	}
+	</script>
+</html>

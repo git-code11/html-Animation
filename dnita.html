@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<style type="text/css">
+	.wrapper{
+		position: relative;
+		width: 150px;
+		height: 150px;
+		top: 100px;
+		left: 200px;
+	}
+
+	.clock{
+		width: 100%;
+		height: 100%;
+		background-color: transparent;
+		border-radius: 150px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		box-shadow: 0px 0px 1px 5px black;
+	}
+
+	.clock::before{
+		content: "";
+		width: 10px;
+		height: 10px;
+		display: block;
+		background-color: black;
+		position: absolute;
+		border-radius: 1rem;
+	}
+
+	.min_hand{
+		border-left:solid 4px black;
+		height: 45px;
+		position: absolute;
+		top:75px;
+		left: calc(75px - 2px);
+	}
+
+	.sec_hand{
+		border-left:solid 2px black;
+		height: 65px;
+		position: absolute;
+		top:75px;
+		left: calc(75px - 1px);
+	}
+
+
+.min_hand,.sec_hand{
+	transform: rotate(-180deg);
+	animation-delay: 0s;
+	animation-timing-function: steps(12,start);
+	animation-iteration-count: infinite;
+}
+
+.min_hand{
+	animation-name: min_hand;
+	animation-duration: 12s;
+	transform-origin: top;
+	/*animation-iteration-count: 1;*/
+}
+
+.sec_hand{
+	animation-name: min_hand;
+	animation-duration: 1s;
+	transform-origin: top;
+	/*animation-iteration-count: 12;*/
+}
+@keyframes min_hand{
+	to{
+		transform: rotate(180deg);
+	}
+
+}
+
+@keyframes sec_hand{
+	to{
+		transform: rotate(180deg);
+	}
+}
+
+</style>
+<body>
+	<div class="wrapper">
+		<div class="clock"></div>
+		<div class="min_hand"></div>
+		<div class="sec_hand"></div>
+	</div>
+</body>
+</html>

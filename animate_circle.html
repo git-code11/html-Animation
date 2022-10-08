@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#liner{
+			stroke: #ff0000;
+			stroke-width:2px;
+		}
+		polyline {
+			fill:none;
+		}
+	</style>
+</head>
+<body>
+	<button onclick="Start()">START</button>
+	<svg width="400px" height="400px" viewbox="0 0 400 400">
+		<rect x=0 y=0 width="400" height="400" style="stroke:brown;fill:#000"/>
+		<polyline id="liner" points=""/>
+		<!-- <polyline id="liner_rev" points="" style="stroke: #0f0"/> -->
+	</svg>
+</body>
+<script type="text/javascript">
+	const svg = document.getElementsByTagName("svg")[0];
+	const liner = document.getElementById("liner");
+	const height = 100;
+	const width = 100;
+	
+	const speed = 10;
+	const _timeout = 100;
+	const gap = 10;
+	function Point(x,y){
+		let p = svg.createSVGPoint();
+		p.x = x;
+		p.y = y;
+		return p;
+	}
+
+	function Draw(x,y){
+		let p = Point(x,y);
+		liner.points.appendItem(p);
+		return p;
+	}
+
+	function move(getxy,setxy,distance,callback,dir){
+		let [x,y] = getxy()
+		let dist = distance;
+		function _load(){
+			if(dist <= 0){
+				setxy(x,y);
+				return callback();
+			}
+
+			switch(dir){
+				case "R":
+					x += speed;
+					break;
+				case "D":
+					y += speed;
+					break;
+				case "L":
+					x -= speed;
+					break;
+				case "U":
+					y -= speed;
+					break;
+			}
+			Draw(x,y);
+			dist -= speed;
+			setTimeout(_load, _timeout);
+		}
+		_load();
+	}
+
+	function moveLeft(x,y,d,c){
+		move(x,y,d,c,"L");
+	}
+
+	function moveRight(x,y,d,c){
+		move(x,y,d,c,"R");
+	}
+
+	function moveUp(x,y,d,c){
+		move(x,y,d,c,"U");
+	}
+
+	function moveDown(x,y,d,c){
+		move(x,y,d,c,"D");
+	}
+
+
+	function run(){
+		let yDistMax = height;
+		let xDistMax = width;
+		let Stop = false
+		let [posX,posY] = [0,0] 
+		let moveDir = "R";
+
+		function getPos(){
+			return [posX,posY];
+		}
+
+		function setPos(x,y){
+			posX = x;
+			posY = y;
+		}
+
+		function _loop(){
+			switch(moveDir) {
+				case "R":
+					//left to right
+					moveRight(getPos,setPos,xDistMax,()=>goTo("D"));
+					break;
+				case "D":
+					//top to bottom
+					moveDown(getPos,setPos,yDistMax,()=>goTo("L"));
+					break;
+				case "L":
+					//right to left
+					moveLeft(getPos,setPos,xDistMax,()=>goTo("U"));
+					break;
+				case "U":
+					//bottom to top 
+					moveUp(getPos,setPos,yDistMax,()=>goTo("R"));
+					break;
+			}
+			
+		}
+
+		function Start(){
+			if(Stop){
+				return true;//done
+			}else{
+				setTimeout(_loop,0);
+			}
+		}
+
+		function setDir(dir){
+			moveDir=dir;
+			STATUS = "ready"
+			switch(dir){
+				case "R":
+					xDistMax -= gap;
+					break;
+				case "D":
+					yDistMax -= gap;
+					break;
+				case "L":
+					xDistMax -= gap;
+					break;
+				case "U":
+					yDistMax -= gap;
+					break;
+			}
+
+			if(yDistMax <= 0 || xDistMax <=0){
+				Stop = true;
+			//	alert("here")
+			}
+			//console.log(Stop)
+		}
+
+		function goTo(dir){
+			setDir(dir);
+			Start();
+		}
+
+		Draw(0,0);
+		return Start;
+
+	}
+
+	const Start = run();
+</script>
+</html>

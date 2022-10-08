@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+
+		body{
+			perspective: 1000px;
+			height: 90vh;
+			width: 90vw;
+		}
+
+		body, #box{
+			display: grid;
+			place-items:center;
+		}
+
+		#box{
+			position: relative;
+			transform-style: preserve-3d;
+			transform: rotateY(30deg);
+		}
+
+		#box > div{
+			width: 200px;
+			height: 200px;
+			position: absolute;
+		}
+
+		#front{
+			background-color: #fee;
+			transform: translateZ(100px);
+		}
+
+		#right{
+			background-color: #eee;
+			transform: rotateY(90deg) translateZ(100px);
+		}
+
+		#back{
+			background-color: #bbb;
+			transform: rotateY(180deg) translateZ(100px);
+		}
+
+		#left{
+			background-color: #857;
+			transform: rotateY(270deg) translateZ(100px);
+		}
+
+
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="front"></div>
+		<div id="back"></div>
+		<div id="right"></div>
+		<div id="left"></div>
+	</div>
+
+</body>
+</html>

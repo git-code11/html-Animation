@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#liner{
+			stroke: #ff0000;
+		}
+		polyline {
+			fill:none;
+		}
+	</style>
+</head>
+<body>
+	<button onClick="run()">START</button>
+	<svg width="500px" height="200px" viewbox="0 0 500 200">
+		<rect x=0 y=0 width="500" height="200" style="stroke:brown;fill:#000"/>
+		<polyline id="liner" points="0 100"/>
+		<polyline id="liner_rev" points="" style="stroke: #0f0"/>
+	</svg>
+</body>
+<script type="text/javascript">
+	const svg = document.getElementsByTagName("svg")[0];
+	const liner = document.getElementById("liner");
+	const liner_rev = document.getElementById("liner_rev");
+	let x = 0, y = 0;
+	let max_X = 500,min_X=0;
+	let xDiff = 1
+	let max_Y = 180,min_Y = 20;
+	let interval = 0;
+	function random(min,max,dp=0){
+		return parseFloat(Number.prototype.toFixed.call((min+ ((Math.random()*10000/**(new Date()).getMilliseconds()*/) % (max - min))),dp));
+	}
+
+	function animate_run(){
+		let point = svg.createSVGPoint()
+		x = x + random(10,15)*xDiff;
+		y = random(min_Y,max_Y,1);
+		point.x = x;
+		point.y = y;
+		liner.points.appendItem(point);
+		if(x > max_X || (xDiff === -1 && x < 0)){
+			/*x = min_X;*/
+			xDiff = -xDiff;
+			clearInterval(interval)
+		}
+
+	}
+
+	function ani_rev(_func){
+		let count = 0;
+		let interval_rev = 0;
+		function run(){
+			if(count === liner.points.length){
+				clearInterval(interval_rev)
+				return _func();
+			}
+			liner_rev.points.appendItem(liner.points[count])
+			count++;
+		}
+		interval_rev = setInterval(run, 250);
+	}
+
+	function run(){
+		liner_rev.points.clear();
+		liner.points.clear();
+		interval = setInterval(animate_run, 200);
+		setTimeout(()=>ani_rev(run),500);	
+	}
+		
+</script>
+</html>

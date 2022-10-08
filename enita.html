@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.wrapper{
+			display: flex;
+			justify-content: left;
+			align-items: center;
+			font-size: 2em;
+			font-family:monospace;
+			background-color: #000;
+			color: #00ff7a;
+			padding:10px;
+			width: 22ch;
+			height: 1em;
+		}
+
+		.the_text{
+			overflow: hidden;
+			border-right: solid 2px white;
+			white-space: nowrap;
+			width: 100%;
+		}
+
+		.the_text{
+			animation-name: t_text,t_cur;
+			animation-duration: 5s,500ms;
+			animation-delay: 0s;
+			animation-timing-function: steps(22,end),step-end;
+			animation-iteration-count: 1,infinite;
+			animation-direction: alternate;
+
+		}
+
+		.the_text::after{
+			content: "###";
+			color: yellow;
+		}
+
+		@keyframes t_text{
+			from{
+				width: 0px;
+			}
+		}
+
+		@keyframes t_cur{
+			
+			50%{
+				border-color: transparent;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="the_text">Ajose Emmanuel.</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		
+		.block{
+			width: 200px;
+			height: 200px;
+			box-shadow: 0 0 2px black;
+			position: relative;
+			top:100px;
+			left: 100px;
+		}
+
+		.ball{
+			width: 14px;
+			height: 14px;
+			background-color: red;
+			position: absolute;
+			top:0px;
+			left: calc(100px - 7px);
+			animation-name: ball_xy,ball_color,ball_pre,ball_color_pre;
+			animation-duration: 2s,2s,1.6s,1.6s;
+			animation-timing-function: linear,steps(5,end),linear,steps(5,end);
+			border-radius: 10px;
+			animation-iteration-count: infinite,infinite,1,1;
+			animation-delay: 1.6s,1.6s,0s,0s;
+		}
+
+		@keyframes ball_pre{
+			from{	
+				top:0px;
+				left: calc(100px - 7px);
+			}
+
+			50%{
+				top:calc(200px - 14px);
+				left: calc(100px - 7px);
+			}
+
+			75%{	
+				top:0px;
+				left: calc(100px - 7px);	
+			}
+
+			to{
+				top:calc(200px - 14px);
+				left: calc(100px - 7px);
+			}
+		}
+
+		@keyframes ball_color_pre{
+			from{
+				background-color: red;
+			}
+
+			50%{
+				background-color: green;
+			}
+
+			to{
+				background-color: blue;
+			}
+		}
+
+		@keyframes ball_xy{
+
+			0%{	
+				top:calc(200px - 14px);
+				left: calc(100px - 7px);
+			}
+
+			25%{
+				top:calc(100px - 7px);
+				left: 0px;
+			}
+
+			50%{
+				top:0px;
+				left: calc(100px - 7px);
+			}
+
+			75%{
+				top:calc(100px - 7px);
+				left:calc(200px - 14px);
+			}
+
+			100%{
+
+				top:calc(200px - 14px);
+				left: calc(100px - 7px);
+			}
+
+		}
+
+		@keyframes ball_color{
+			0%{
+				background-color: red;
+			}
+
+			25%{
+				background-color: green;
+			}
+
+			50%{
+				background-color: blue;
+			}
+
+			75%{
+				background-color: purple;
+			}
+
+			100%{
+				background-color: red;
+			}
+		}
+
+	</style>
+</head>
+<body>
+	<div class="block">
+		<div class="ball"></div>
+	</div>
+
+</body>
+</html>

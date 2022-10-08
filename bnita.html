@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.q_list{
+			width: fit-content;
+			display: grid;
+			grid-template-areas: 
+			"a b c"
+			"e . d"
+			"h g f";
+			grid-template-rows:repeat(3,auto);
+			grid-template-columns:repeat(3,auto); 
+			grid-gap: 5px;
+		}
+
+		.q{
+			width: 10px;
+			height: 10px;
+			background-color: red;
+			/*transition: opacity 100ms linear;*/
+			/*border-radius: 25px;*/
+			animation-duration: 2s;
+			animation-timing-function: step-end;
+			animation-iteration-count: 12;
+			opacity: 0;
+		}
+
+		.q1{
+			animation-name:kq1; 
+		}
+
+		.q2{
+			animation-name:kq2;
+		}
+
+		.q3{
+			animation-name:kq3;
+		}
+
+		.q4{
+			grid-area: d;
+			animation-name:kq4;
+		}
+
+		.q5{
+			grid-area: f;
+			animation-name:kq5;
+		}
+
+		.q6{
+			grid-area: g;
+			animation-name:kq6;
+		}
+		.q7{
+			grid-area: h;
+			animation-name:kq7;
+		}
+		.q8{
+			grid-area: e;
+			animation-name:kq8;
+		}
+
+
+		@keyframes kq1{
+			0%{
+				opacity: 1;
+			}
+
+			12.5%{
+				opacity: 0;
+			}
+
+			25%{
+				opacity: 0;
+			}
+
+			37.5%{
+				opacity: 0;
+			}
+
+			50%{
+				opacity: 1;
+			}
+
+			62.5%{
+				opacity: 1;
+			}
+
+			75%{
+				opacity: 1;
+			}
+
+			87.5%{
+				opacity: 1;
+			}
+
+			100%{
+				opacity: 1;
+			}
+		}
+
+		@keyframes kq2{
+			0%{
+				opacity: 1;
+			}
+
+			12.5%{
+				opacity: 1;
+			}
+
+			25%{
+				opacity: 0;
+			}
+
+			37.5%{
+				opacity: 0;
+			}
+
+			50%{
+				opacity: 0;
+			}
+
+			62.5%{
+				opacity: 1;
+			}
+
+			75%{
+				opacity: 1;
+			}
+
+			87.5%{
+				opacity: 1;
+			}
+
+			100%{
+				opacity: 1;
+			}
+		}
+
+		@keyframes kq3{
+			0%{
+				opacity: 1;
+			}
+
+			12.5%{
+				opacity: 1;
+			}
+
+			25%{
+				opacity: 1;
+			}
+
+			37.5%{
+				opacity: 0;
+			}
+
+			50%{
+				opacity: 0;
+			}
+
+			62.5%{
+				opacity: 0;
+			}
+
+			75%{
+				opacity: 1;
+			}
+
+			87.5%{
+				opacity: 1;
+			}
+
+			100%{
+				opacity: 1;
+			}
+		}
+
+		@keyframes kq4{
+			0%{
+				opacity: 1;
+			}
+
+			12.5%{
+				opacity: 1;
+			}
+
+			25%{
+				opacity: 1;
+			}
+
+			37.5%{
+				opacity: 1;
+			}
+
+			50%{
+				opacity: 0;
+			}
+
+			62.5%{
+				opacity: 0;
+			}
+
+			75%{
+				opacity: 0;
+			}
+
+			87.5%{
+				opacity: 1;
+			}
+
+			100%{
+				opacity: 1;
+			}
+		}
+
+		@keyframes kq5{
+			0%{
+				opacity: 1;
+			}
+
+			12.5%{
+				opacity: 1;
+			}
+
+			25%{
+				opacity: 1;
+			}
+
+			37.5%{
+				opacity: 1;
+			}
+
+			50%{
+				opacity: 1;
+			}
+
+			62.5%{
+				opacity: 0;
+			}
+
+			75%{
+				opacity: 0;
+			}
+
+			87.5%{
+				opacity: 0;
+			}
+
+			100%{
+				opacity: 1;
+			}
+		}
+
+		@keyframes kq6{
+			0%{
+				opacity: 0;
+			}
+
+			12.5%{
+				opacity: 1;
+			}
+
+			25%{
+				opacity: 1;
+			}
+
+			37.5%{
+				opacity: 1;
+			}
+
+			50%{
+				opacity: 1;
+			}
+
+			62.5%{
+				opacity: 1;
+			}
+
+			75%{
+				opacity: 0;
+			}
+
+			87.5%{
+				opacity: 0;
+			}
+
+			100%{
+				opacity: 0;
+			}
+		}
+
+		@keyframes kq7{
+			0%{
+				opacity: 0;
+			}
+
+			12.5%{
+				opacity: 0;
+			}
+
+			25%{
+				opacity: 1;
+			}
+
+			37.5%{
+				opacity: 1;
+			}
+
+			50%{
+				opacity: 1;
+			}
+
+			62.5%{
+				opacity: 1;
+			}
+
+			75%{
+				opacity: 1;
+			}
+
+			87.5%{
+				opacity: 0;
+			}
+
+			100%{
+				opacity: 0;
+			}
+		}
+
+		@keyframes kq8{
+			0%{
+				opacity: 0;
+			}
+
+			12.5%{
+				opacity: 0;
+			}
+
+			25%{
+				opacity: 0;
+			}
+
+			37.5%{
+				opacity: 1;
+			}
+
+			50%{
+				opacity: 1;
+			}
+
+			62.5%{
+				opacity: 1;
+			}
+
+			75%{
+				opacity: 1;
+			}
+
+			87.5%{
+				opacity: 1;
+			}
+
+			100%{
+				opacity: 0;
+			}
+		}
+	</style>
+	
+</head>
+<body>
+
+	<div class="q_list">
+		<div class="q q1"></div>
+		<div class="q q2"></div>
+		<div class="q q3"></div>
+		<div class="q q4"></div>
+		<div class="q q5"></div>
+		<div class="q q6"></div>
+		<div class="q q7"></div>
+		<div class="q q8"></div>
+	</div>
+
+</body>
+<script type="text/javascript">
+	/*var ql = document.querySelector('.q_list');
+	let num = 0;
+	let length = ql.children.length;
+	function _anita(){
+		num = num % length;
+		for(let elt of ql.children){
+			elt.style.opacity=0;
+		}
+
+		for(let i=0;i<4;i++){
+			ql.children[(num+i)%length].style.opacity=1;
+		}
+		num++;
+	}
+	setInterval(_anita,1000);*/	
+</script>
+</html>
