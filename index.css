@@ -1,0 +1,44 @@
+
+#wrap {
+    display: flex;
+    perspective: 800px;
+    perspective-origin: -200px -537px;
+    transform-style: preserve-3d;
+    position: fixed;
+    top: 11%;
+    left: 66%;
+    transform: scale(0.8);
+}
+
+
+.grp{
+    --height:300px;
+    --width:450px;
+	position: absolute;
+    display: flex;
+    flex: none;
+    transform-origin: left center;
+    transform: translate(-50%,40%) rotateX(80deg) rotateY(0deg);
+}
+
+
+.lay{
+    position: relative;
+	width:5px;
+	height:300px;
+	/*border-right: solid 1px yellow;*/
+    /*background-size: 450px 300px;*/
+}
+
+.lay .baby{
+    width:100%;
+    height: 100%;
+    background-size: 450px 300px;
+    position: absolute;
+}
+
+.next .baby:nth-child(2){
+    visibility: hidden;
+}
+
+

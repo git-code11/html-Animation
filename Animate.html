@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="style__1.css">
+    <title></title>
+  </head>
+  <body>
+    <main id="page">
+      <div class="page_child" style="background-image:url(01.png)"></div>
+      <div class="page_child" style="background-image:url(02.png)"></div>
+      <div class="page_child" style="background-image:url(03.png)"></div>
+      <div class="page_child" style="background-image:url(04.png)"></div>
+      <div class="page_child" style="background-image:url(05.png)"></div>
+    </main>
+  </body>
+  <script>
+    let change = 6;
+    function load(){
+      let pc = document.getElementById("page");
+      if(change>3)
+        pc.appendChild(pc.children[0]);
+      else if(change > 0)
+        pc.insertBefore(pc.children[4], pc.children[0])
+      else
+        change = 7
+      change -= 1;
+    }
+    setInterval(load,2000);
+  </script>
+</html>

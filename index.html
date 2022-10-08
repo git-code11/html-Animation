@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+<body>
+	<!---Designed Mr. vector11-->
+	<button onclick="PAGE.prev()"><b>PREV</b></button>
+  	<button onClick="PAGE.next()"><b>NEXT</b></button>
+  	<hr size=5 color="purple"/>
+	<div id="wrap">
+		<div class="grp">
+		</div>
+		<div class="grp">
+		</div>
+		<div class="grp">
+		</div>
+		<div class="grp">
+		</div>
+		<div class="grp">
+		</div>
+		<div class="grp">
+		</div>
+		<div class="grp">
+		</div>
+		<div class="grp">
+		</div>
+		<div class="grp">
+		</div>
+		<div class="grp">
+		</div>		
+	</div>
+
+<script type="text/javascript">
+let grps = document.getElementsByClassName("grp");
+const angle = Math.PI*1.45/70;
+const k = 0.25;
+const childWidth = 5;
+const IMAGE = ["01.png","02.png","03.png","04.png", "05.png","06.png"];
+const COLORS = ["green","red","blue","pink","yellow","purple","brown","orange","black","grey"];
+function grow(elt, __pos){
+	let fragment = document.createDocumentFragment();
+	let child = document.createElement('div');
+	child.classList.add('lay');
+	//child.style.backgroundColor = COLORS[__pos%COLORS.length];
+	//child.style.backgroundImage = `url(${IMAGE[__pos%IMAGE.length]})`;
+
+	let baby = document.createElement('div');
+	baby.classList.add('baby');
+	baby.style.backgroundImage = `url(${IMAGE[(__pos+4)%IMAGE.length]})`;
+
+	let baby1 = baby.cloneNode();
+	baby1.style.backgroundImage = `url(${IMAGE[(__pos)%IMAGE.length]})`;
+	
+	let total = 20;
+	
+	for(let i=-20;i<70;i++){
+		let elt = child.cloneNode(true);
+		elt.style.transform = `translate(0px,${k*Math.sin(angle*i+4)*80}px) rotateY(180deg)`;
+		// elt.style.backgroundPosition = `${(i+20)*childWidth}px 0px`
+
+		let pikin = baby.cloneNode(true);
+		//pikin.style.transform = `translate(0px,${k*Math.sin(angle*i+4)*80}px) rotateY(180deg)`;
+		pikin.style.backgroundPosition = `${(i+20)*childWidth}px 0px`
+		elt.append(pikin);
+
+		let pikin1 = baby1.cloneNode(true);
+		//pikin1.style.transform = `translate(0px,${k*Math.sin(angle*i+4)*80}px) rotateY(180deg)`;
+		pikin1.style.backgroundPosition = `${(i+20)*childWidth}px 0px`
+		elt.append(pikin1);
+
+		fragment.append(elt);
+	}
+	elt.append(fragment);
+}
+
+for(let i=0; i<grps.length;i++){
+	grow(grps[i], i);
+}
+
+
+const interpolate = (from, to)=>(p)=>from + p * (to - from);
+
+const goRight = interpolate(k,-k);
+const goLeft = interpolate(-k,k);
+const goLeftag = interpolate(0,-180);
+const goRightag = interpolate(-180,0);
+
+function setShow(max=10){
+	//for left
+	grps[i].style.zIndex = grps.length-i;
+}
+
+function run(parent, children, _ang, _laps=200){
+	let percent = 0;
+	function handler(_onEnd,_id){
+		parent.style.transform = `translate(-50%,40%) rotateX(80deg) rotateY(${_ang(percent)}deg)`;
+		
+		if(percent>=1){
+			percent = 0;
+			setTimeout(_onEnd,0,_id);
+			return;
+		}
+		//console.log(percent);
+		if(percent === 0.5){
+			parent.style.zIndex = -parent.style.zIndex;  
+			parent.classList.toggle('next');
+			console.log("switched to",parent.style.zIndex)
+		}
+
+		percent = (percent*100 + 10)/100;
+		setTimeout(handler,_laps,_onEnd,_id);
+	}
+	return handler; 
+}
+
+function animate(elt){
+	let children = elt.querySelectorAll('.lay');
+	const runLeft = run(elt, children, goLeftag);
+	const runRight = run(elt, children, goRightag);
+	return {runLeft, runRight}
+}
+
+const ant = animate(grps[0]);
+
+function Lock(){
+	let locked = false;
+
+	function gain(){
+		if(locked)
+			return
+		locked = true;
+	}
+
+	function release(){
+		if(!locked)
+			return
+		locked = false;
+	}
+
+	function isLocked(){
+		return locked;
+	}
+
+	return {gain,release, isLocked};
+}
+
+function flip(){
+	const controllers = [];
+	let pointer = -1;
+	let locked = Lock();
+
+	for(let i=0; i<grps.length;i++){
+		controllers.push(animate(grps[i]));
+		grps[i].style.zIndex = grps.length-i
+	}
+
+	function flipLeft(_laps=200){
+		let i = 0;
+		return function handler(){
+			if(i>controllers.length-1)
+				return "Done";
+			controllers[i++].runLeft();
+			setTimeout(handler,_laps + 2500)
+		}
+	}
+
+	function flipRight(_laps=200){
+		let i = controllers.length-1;
+		return function handler(){
+			if(i<0)
+				return "Done";
+			controllers[i--].runRight();
+			setTimeout(handler,_laps + 2500+2000)
+		}
+
+	}
+
+	function current(){
+		return pointer + 1;
+	}
+
+	function next(){
+		if(locked.isLocked()){
+			console.log(`${arguments.callee.name} is locked wait`);
+			return false
+		}
+
+		if(pointer<controllers.length-1){
+			locked.gain();
+			setTimeout(controllers[++pointer].runLeft(()=>locked.release()));
+		}
+	}
+
+	function prev(){
+		if(locked.isLocked()){
+			console.log(`${arguments.callee.name} is locked wait`);
+			return false
+		}
+
+		if(pointer!=-1){
+			locked.gain();
+			setTimeout(controllers[pointer--].runRight(()=>locked.release()));
+		}
+	}
+
+
+	return {flipLeft, flipRight, next, prev, current};
+}
+
+const PAGE = flip();
+
+</script>
+</body>
+</html>
